@@ -15,7 +15,7 @@ def result():
                            user='riva.valentino', password='xxx123##', database='riva.valentino')
     # invio query al database e ricezione informazioni
     nomeprodotto = request.args['NomeProdotto']
-    query = f"select * from production.products where products_name like '{nomeprodotto}%'"
+    query = f"select * from production.products where product_name like '{nomeprodotto}%'"
     dfprodotti = pd.read_sql(query, conn)
     # visualizzare le informazioni
    
