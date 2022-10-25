@@ -22,6 +22,7 @@ def home():
 def selezione():
     global df1
     global df2
+    global df3
     scelta = request.args["scelta"]
     if scelta == "es1":
 
@@ -41,9 +42,15 @@ def selezione():
         
         return render_template("due.html", nomiColonne=df2.columns.values, dati=list(df2.values.tolist()))
     elif scelta == "es3":
-     return render_template("tre.html")
+         conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS',
+                               user='riva.valentino', password='xxx123##', database='riva.valentino')
+        # invio query al database e ricezione informazioni
+         query = 'SELECT brand_name, count(*) as numero_prodotti FROM production.products inner join production.brands on brands.brand_id = products.brand_id group by brand_name'
+         df3 = pd.read_sql(query,conn)
+
+         return render_template("tre.html", nomiColonne=df3.columns.values, dati=list(df3.values.tolist()))
     elif scelta == "es4":
-     return render_template("search.html")
+        return render_template("search.html")
 
 
 @app.route("/graficoes1", methods=["GET"])
@@ -61,6 +68,18 @@ def graficoes2():
     ax = plt.axes()
     fig.autofmt_xdate(rotation=0)
     ax.barh(df2.store_name, df2.numero_ordini, color='g')
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
+
+@app.route("/graficoes3", methods=["GET"])
+def graficoes3():
+    fig = plt.figure()
+    ax = plt.axes()
+    cols = ['c','b','hotpink','yellow','red','brown'] 
+
+    ax.pie(df3.numero_prodotti,colors=cols,labels=df3.brand_name)
+
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
