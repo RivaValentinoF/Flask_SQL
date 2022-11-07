@@ -10,19 +10,23 @@
 <body>
     <div class="container">
     <table class="table">
-        <tr>
-            {% for col in nomiColonne %}
-                <td>{{col}} </tr>
-            {% endfor %}
-        </tr>
+    
         {% for record in dati %}
-            <tr>
-                {% for index in range(nomiColonne|length) %}
+           
+                {% for index in range(nomiColonne|length) %}  
+                <tr>
+                    <td>
+                        {{nomiColonne[index]}}
+                    </td>
                     <td>
                         {{record[index]}}
-                    </tr>
+                    </td>
+
+                </tr>
+                    
+
                 {% endfor %}
-            </tr>
+            
         {% endfor %}
     </table>
     
