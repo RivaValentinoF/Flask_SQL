@@ -10,9 +10,7 @@
 <body>
     <div class="container">
     <table class="table">
-    
         {% for record in dati %}
-           
                 {% for index in range(nomiColonne|length) %}  
                 <tr>
                     <td>
@@ -21,12 +19,8 @@
                     <td>
                         {{record[index]}}
                     </td>
-
                 </tr>
-                    
-
-                {% endfor %}
-            
+                {% endfor %} 
         {% endfor %}
     </table>
     
