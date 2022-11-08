@@ -10,7 +10,9 @@ import matplotlib
 matplotlib.use('Agg')
 import pymssql
 
-conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user='porta.matteo', password='xxx123##', database='porta.matteo')
+conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS',
+                           user='riva.valentino', password='xxx123##', database='riva.valentino')
+
 
 @app.route("/bestCustomers", methods=["GET"])
 def bestCustomers():
