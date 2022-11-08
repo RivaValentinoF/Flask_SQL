@@ -21,10 +21,12 @@
                     <td>
                         <a href="/totaleOrdini/{{record[index]}}">{{record[index]}}</a>
                     </td>
-                    {%endif%}
+                    {%else%}
                     <td>
-                      {{record[index]}}</a>
-                    </td>
+                        {{record[index]}}</a>
+                      </td>
+                    {%endif%}
+                    
                 {% endfor %}
             </tr>
         {% endfor %}
